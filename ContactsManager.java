@@ -15,26 +15,28 @@ public class ContactsManager {
         Path dataDirectory = Paths.get(directory);
         Path datafile = Paths.get(directory,fileName);
 
-        //Create directory data & file named contacts.txt within
-        try{
-            if (Files.notExists(dataDirectory)){
-                Files.createDirectories(dataDirectory);
-            }
-        }
-        catch(IOException e){
-            System.out.println("Exception caught at " + e);
-            e.printStackTrace();
-        }
 
-        try{
-            if(Files.notExists(datafile)){
-                Files.createDirectories(datafile);
+
+
+
+        //Create directory data & file named contacts.txt within
+            try {
+                if (Files.notExists(dataDirectory)) {
+                    Files.createDirectories(dataDirectory);
+                }
+            } catch (IOException e) {
+                System.out.println("Exception caught at " + e);
+                e.printStackTrace();
             }
-        }
-        catch (IOException e){
-            System.out.println("Exception caught at " + e);
-            e.printStackTrace();
-        }
+
+            try {
+                if (Files.notExists(datafile)) {
+                    Files.createFile(datafile);
+                }
+            } catch (IOException e) {
+                System.out.println("Exception caught at " + e);
+                e.printStackTrace();
+            }
         //Create directory data & file named contacts.txt within
 
         //Ask user for username and phone number
@@ -45,29 +47,40 @@ public class ContactsManager {
         String userPhoneNumber = userInput.nextLine();
         //Ask user for username and phone number
 
-        //Write a list of strings to a file
-        Path Files.write();
-
         //Creat list & write contents to file
-        try{
-            List<String> contactList = Arrays.asList(userContact,userPhoneNumber);
-            Path filePath = Paths.get("data","contacts.txt");
-            Files.write(filePath,contactList);}
-        catch(IOException e){
-            System.out.println("Exception caught at " + e);
-            e.printStackTrace();
-        }
+//        try{
+//            List<String> contactList = Arrays.asList(userContact,userPhoneNumber);
+//            Path filePath = Paths.get("data","contacts.txt");//filePath = data/contacts.txt
+//            Files.write(filePath,contactList);}
+//        catch(IOException e){
+//            System.out.println("Exception caught at " + e);
+//            e.printStackTrace();
+//        }
         //Create list & write contents to file
 
 
+
+//        System.out.println("Enter a user name");
+//        String userAddContact = userInput.nextLine();
+//        System.out.println("Enter their phone number");
+//        String userAddPhoneNumber = userInput.nextLine();
+
+
+        //Adds Contact name and number to list
         try{Files.write(Paths.get("data","contacts.txt"),
-                Arrays.asList(userContact), StandardOpenOption.APPEND);}
+                Arrays.asList(userContact + " " + userPhoneNumber), StandardOpenOption.APPEND);}
         catch(IOException e){
             System.out.println("IOException caught at " + e);
             e.printStackTrace();
         }
+        //Adds contact name and number to list
+
+//        try{}
+//        catch (){}
 
 
-
+//        Path contactsPath = Paths.get("data","contacts.txt");
+//        List<String> contactsList = new ArrayList<>();
+//        contactsList
     }
 }
