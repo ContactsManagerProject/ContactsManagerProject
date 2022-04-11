@@ -3,10 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ContactsManager {
         String directory;
@@ -139,12 +136,12 @@ public class ContactsManager {
     public void searchContact(){
         System.out.println("Enter name to search for");
         Scanner userInput = new Scanner(System.in);
-        String userSearch = userInput.nextLine();
+        String userSearch = userInput.nextLine().toLowerCase();
         try {
             List<String> lines = Files.readAllLines(Paths.get("data", "contacts.txt"));
 
             for (String line : lines) {
-                if (line.contains(userSearch)) {
+                if (line.toLowerCase().contains(userSearch)) {
                     System.out.println(line);
                 }
             }
@@ -153,16 +150,17 @@ public class ContactsManager {
             System.out.println("Exception caught at " + iox);
             iox.printStackTrace();
         }
-    };
+    }
 
     public void mainScreen(){
-        System.out.println("1. View contacts.\n" +
-                "2. Add a new contact.\n" +
-                "3. Search a contact by name.\n" +
-                "4. Delete an existing contact.\n" +
-                "5. Exit.\n" +
-                "Enter an option (1, 2, 3, 4 or 5):");
-    };
+        System.out.println("""
+                1. View contacts.
+                2. Add a new contact.
+                3. Search a contact by name.
+                4. Delete an existing contact.
+                5. Exit.
+                Enter an option (1, 2, 3, 4 or 5):""");
+    }
     //Search for user info by name or number
 
 
