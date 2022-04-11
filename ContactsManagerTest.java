@@ -13,7 +13,8 @@ public class ContactsManagerTest {
 
         contactList.printLines();
 
-        contactList.deleteContact();
+//        contactList.deleteContact();
+        contactList.searchContact();
 
     }
 }

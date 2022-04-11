@@ -83,6 +83,7 @@ public class ContactsManager {
             System.out.println(line);
         }
     }
+    //Print user data
 
     //Delete user function
     public void deleteContact() {
@@ -103,12 +104,33 @@ public class ContactsManager {
             }
             Files.write(Paths.get("data","contacts.txt"), newList);}
 
-            catch(IOException e){
-                System.out.println("Exception caught at " + e);
-                e.printStackTrace();
+            catch(IOException iox){
+                System.out.println("Exception caught at " + iox);
+                iox.printStackTrace();
             }
         }
     //Delete user content
+
+    //Search for user info by name or number
+    public void searchContact(){
+        System.out.println("Enter name to search for");
+        Scanner userInput = new Scanner(System.in);
+        String userSearch = userInput.nextLine();
+        try {
+            List<String> lines = Files.readAllLines(Paths.get("data", "contacts.txt"));
+
+            for (String line : lines) {
+                if (line.contains(userSearch)) {
+                    System.out.println(line);
+                }
+            }
+        }
+        catch(IOException iox){
+            System.out.println("Exception caught at " + iox);
+            iox.printStackTrace();
+        }
+    }
+    //Search for user info by name or number
 
 
     //Creat list & write contents to file
