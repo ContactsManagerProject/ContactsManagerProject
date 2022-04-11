@@ -15,6 +15,7 @@ public class ContactsManager {
         Path datafile;
         List<String> fileData;
 
+        //Declare data
         public ContactsManager(String fileName, String directory) {
             this.fileName = fileName;
             this.directory = directory;
@@ -24,6 +25,7 @@ public class ContactsManager {
 
             this.fileData = getFile();
         }
+        //Declare data
 
         //Create directory data & file named contacts.txt within
             public List<String> getFile() {
@@ -56,11 +58,11 @@ public class ContactsManager {
             }
         //Create directory data & file named contacts.txt within
 
-        //Ask user for username and phone number
+        //Ask user for username and phone number and add to list
     public void getUserInput() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Enter a user name");
-        String userContact = userInput.nextLine();
+        String userContact = userInput.nextLine() + "  |  ";
         System.out.println("Enter their phone number");
         String userPhoneNumber = userInput.nextLine();
 
@@ -71,9 +73,45 @@ public class ContactsManager {
             e.printStackTrace();
         }
     }
-        //Ask user for username and phone number
+        //Ask user for username and phoneNumber and add to list
 
-        //Creat list & write contents to file
+    //Print user data
+    public void printLines() {
+        System.out.println("Name  |  Phone number");
+        System.out.println("--------------------");
+        for (String line : fileData) {
+            System.out.println(line);
+        }
+    }
+
+    //Delete user function
+    public void deleteContact() {
+            try{
+            List<String> lines = Files.readAllLines(Paths.get("data","contacts.txt"));
+            List<String> newList = new ArrayList<>();
+
+            Scanner userInput = new Scanner(System.in);
+        System.out.println("Type a contact to delete");
+        String contactToDelete = userInput.nextLine();
+
+            for (String line : lines){
+                if (line.contains(contactToDelete)){
+                    newList.add("USER DELETED");
+                    continue;
+                }
+                newList.add(line);
+            }
+            Files.write(Paths.get("data","contacts.txt"), newList);}
+
+            catch(IOException e){
+                System.out.println("Exception caught at " + e);
+                e.printStackTrace();
+            }
+        }
+    //Delete user content
+
+
+    //Creat list & write contents to file
 //        try{
 //            List<String> contactList = Arrays.asList(userContact,userPhoneNumber);
 //            Path filePath = Paths.get("data","contacts.txt");//filePath = data/contacts.txt
@@ -82,27 +120,22 @@ public class ContactsManager {
 //            System.out.println("Exception caught at " + e);
 //            e.printStackTrace();
 //        }
-        //Create list & write contents to file
 
+        //Create list & write contents to file
 
 
 //        System.out.println("Enter a user name");
 //        String userAddContact = userInput.nextLine();
 //        System.out.println("Enter their phone number");
+
 //        String userAddPhoneNumber = userInput.nextLine();
 
 
         //Adds Contact name and number to list
 
         //Adds contact name and number to list
-
 //        Path contactsPath = Paths.get("data","contacts.txt");
 //        List<String> contactsList = new ArrayList<>();
 //        contactsList
-    public void printLines() {
-            for (String line : fileData) {
-                System.out.println(line);
-            }
-    }
     }
 
