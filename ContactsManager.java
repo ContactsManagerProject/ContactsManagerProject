@@ -66,14 +66,36 @@ public class ContactsManager {
         System.out.println("Enter their phone number");
         String userPhoneNumber = userInput.nextLine();
 
-        try{Files.write(Paths.get("data","contacts.txt"),
-                Arrays.asList(userContact + " " + userPhoneNumber), StandardOpenOption.APPEND);}
-        catch(IOException e){
-            System.out.println("IOException caught at " + e);
-            e.printStackTrace();
+        if (userPhoneNumber.length() == 10){
+            String formattedPhoneNumber = String.format("(%s) %s-%s", userPhoneNumber.substring(0, 3), userPhoneNumber.substring(3, 6),
+                    userPhoneNumber.substring(6, 10));
+
+            try {
+                Files.write(Paths.get("data", "contacts.txt"),
+                        Arrays.asList(userContact + " " + formattedPhoneNumber), StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                System.out.println("IOException caught at " + e);
+                e.printStackTrace();
+            }
         }
 
-        printLines();
+        else if (userPhoneNumber.length() == 7) {
+            String formattedPhoneNumber = String.format("%s-%s", userPhoneNumber.substring(0, 3), userPhoneNumber.substring(3, 7));
+
+            try {
+                Files.write(Paths.get("data", "contacts.txt"),
+                        Arrays.asList(userContact + " " + formattedPhoneNumber), StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                System.out.println("IOException caught at " + e);
+                e.printStackTrace();
+            }
+
+        }
+            else {
+                System.out.println("You have entered an incorrect phone #.");
+            }
+
+//        printLines();
     }
         //Ask user for username and phoneNumber and add to list
 
