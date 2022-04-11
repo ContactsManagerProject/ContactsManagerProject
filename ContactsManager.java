@@ -59,7 +59,7 @@ public class ContactsManager {
         //Create directory data & file named contacts.txt within
 
         //Ask user for username and phone number and add to list
-    public void getUserInput() {
+    public void addContactInfo() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Enter a user name");
         String userContact = userInput.nextLine() + "  |  ";
@@ -72,6 +72,8 @@ public class ContactsManager {
             System.out.println("IOException caught at " + e);
             e.printStackTrace();
         }
+
+        printLines();
     }
         //Ask user for username and phoneNumber and add to list
 
@@ -129,7 +131,16 @@ public class ContactsManager {
             System.out.println("Exception caught at " + iox);
             iox.printStackTrace();
         }
-    }
+    };
+
+    public void mainScreen(){
+        System.out.println("1. View contacts.\n" +
+                "2. Add a new contact.\n" +
+                "3. Search a contact by name.\n" +
+                "4. Delete an existing contact.\n" +
+                "5. Exit.\n" +
+                "Enter an option (1, 2, 3, 4 or 5):");
+    };
     //Search for user info by name or number
 
 
