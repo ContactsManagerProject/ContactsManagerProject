@@ -15,10 +15,6 @@ public class ContactsManager {
         Path dataDirectory = Paths.get(directory);
         Path datafile = Paths.get(directory,fileName);
 
-
-
-
-
         //Create directory data & file named contacts.txt within
             try {
                 if (Files.notExists(dataDirectory)) {
@@ -74,10 +70,6 @@ public class ContactsManager {
             e.printStackTrace();
         }
         //Adds contact name and number to list
-
-//        try{}
-//        catch (){}
-
 
 //        Path contactsPath = Paths.get("data","contacts.txt");
 //        List<String> contactsList = new ArrayList<>();
