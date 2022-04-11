@@ -9,42 +9,68 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ContactsManager {
-    public static void main(String[] args) {
-        String directory = "data";
-        String fileName = "contacts.txt";
-        Path dataDirectory = Paths.get(directory);
-        Path datafile = Paths.get(directory,fileName);
+        String directory;
+        String fileName;
+        Path dataDirectory;
+        Path datafile;
+        List<String> fileData;
 
+        public ContactsManager(String fileName, String directory) {
+            this.fileName = fileName;
+            this.directory = directory;
 
+            this.dataDirectory = Paths.get(directory);
+            this.datafile = Paths.get(directory, fileName);
 
-
+            this.fileData = getFile();
+        }
 
         //Create directory data & file named contacts.txt within
-            try {
-                if (Files.notExists(dataDirectory)) {
-                    Files.createDirectories(dataDirectory);
-                }
-            } catch (IOException e) {
-                System.out.println("Exception caught at " + e);
-                e.printStackTrace();
-            }
+            public List<String> getFile() {
 
-            try {
-                if (Files.notExists(datafile)) {
-                    Files.createFile(datafile);
+                try {
+                    if (Files.notExists(dataDirectory))
+                        Files.createDirectories(dataDirectory);
+                } catch (IOException e) {
+                    System.out.println("Exception caught at " + e);
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                System.out.println("Exception caught at " + e);
-                e.printStackTrace();
+
+                try {
+                    if (Files.notExists(datafile)) {
+                        Files.createFile(datafile);
+                    }
+                } catch (IOException e) {
+                    System.out.println("Exception caught at " + e);
+                    e.printStackTrace();
+                }
+                List<String> data = null;
+
+                try {
+                    data = Files.readAllLines(datafile);
+                } catch (IOException iox) {
+                    System.out.println("Error reading files " + iox);
+                    iox.printStackTrace();
+                }
+                return data;
             }
         //Create directory data & file named contacts.txt within
 
         //Ask user for username and phone number
+    public void getUserInput() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Enter a user name");
         String userContact = userInput.nextLine();
         System.out.println("Enter their phone number");
         String userPhoneNumber = userInput.nextLine();
+
+        try{Files.write(Paths.get("data","contacts.txt"),
+                Arrays.asList(userContact + " " + userPhoneNumber), StandardOpenOption.APPEND);}
+        catch(IOException e){
+            System.out.println("IOException caught at " + e);
+            e.printStackTrace();
+        }
+    }
         //Ask user for username and phone number
 
         //Creat list & write contents to file
@@ -67,12 +93,7 @@ public class ContactsManager {
 
 
         //Adds Contact name and number to list
-        try{Files.write(Paths.get("data","contacts.txt"),
-                Arrays.asList(userContact + " " + userPhoneNumber), StandardOpenOption.APPEND);}
-        catch(IOException e){
-            System.out.println("IOException caught at " + e);
-            e.printStackTrace();
-        }
+
         //Adds contact name and number to list
 
 //        try{}
@@ -82,5 +103,10 @@ public class ContactsManager {
 //        Path contactsPath = Paths.get("data","contacts.txt");
 //        List<String> contactsList = new ArrayList<>();
 //        contactsList
+    public void printLines() {
+            for (String line : fileData) {
+                System.out.println(line);
+            }
     }
-}
+    }
+
